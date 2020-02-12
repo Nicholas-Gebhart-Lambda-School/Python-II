@@ -36,6 +36,10 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+def main():
+
+    while True:
+        input("Where would you like to go? ")
 
 # Make a new player object that is currently in the 'outside' room.
 
@@ -49,3 +53,6 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+if __name__ == "__main__":
+    main()
