@@ -6,3 +6,5 @@ class Player():
         self.name = name
         self.current = current
 
+    def __str__(self):
+        return f"{self.name}, {self.current}"
