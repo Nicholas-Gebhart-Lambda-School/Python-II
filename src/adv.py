@@ -1,9 +1,10 @@
 from room import Room
+import sys
 from player import Player
 
-# Declare all the rooms
+# Declare all the ROOMs
 
-room = {
+ROOM = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons"),
 
@@ -23,39 +24,75 @@ earlier adventurers. The only exit is to the south."""),
 }
 
 
-# Link rooms together
+# Link ROOMs together
 
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
+ROOM['outside'].n_to = ROOM['foyer']
+ROOM['foyer'].s_to = ROOM['outside']
+ROOM['foyer'].n_to = ROOM['overlook']
+ROOM['foyer'].e_to = ROOM['narrow']
+ROOM['overlook'].s_to = ROOM['foyer']
+ROOM['narrow'].w_to = ROOM['foyer']
+ROOM['narrow'].n_to = ROOM['treasure']
+ROOM['treasure'].s_to = ROOM['narrow']
 
 #
 # Main
 #
-def main():
 
-# Make a new player object that is currently in the 'outside' room.
-    player = Player("Nicholas", room['outside'])
-    print(player)
+
+def input_options():
+    """
+    Prints game opions
+    """
+
+    print("""
+=============== HELP ME ===============
+==      Use [n, s, e ,w ] to move    ==
+==         Press q to quit           ==
+==      Press h for this menu        ==
+=======================================
+    """)
+
+
+VIABLE = ["n", "s", "e", "w", "h", "q"]
+
+
+def main():
+    """
+    Initialize game state
+    """
+
+    # Make a new player object that is currently in the 'outside' ROOM.
+    player = Player("Nicholas", ROOM['outside'])
 # Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
 
     while True:
-        input("Where would you like to go? ")
+        print(player.current_room.name)
+        print(player.current_room.description)
+        result = input("Where would you like to go? [n/s/e/w] ").lower()
+
+        if result in VIABLE:
+            if result == "h":
+                input_options()
+            if result == "q":
+                print('\nGoodbye!\n')
+                sys.exit()
+        else:
+            print("""
+=============== WARNING ===============
+==    That is not a real command!    ==
+==         Press h for help          ==
+=======================================
+""")
 
 
+# * Prints the current ROOM name
+# * Prints the current description (the textwrap module might be useful here).
+# * Waits for user input and decides what to do.
+
+# If the user enters a cardinal direction, attempt to move to the ROOM there.
+# Print an error message if the movement isn't allowed.
+
+# If the user enters "q", quit the game.
 if __name__ == "__main__":
     main()
