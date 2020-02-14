@@ -3,7 +3,7 @@ Items module for adventure game!
 """
 
 
-class Item():
+class Item:
     """
     Item!
     """
